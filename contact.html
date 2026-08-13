@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TasteHub - Contact Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========== ROOT VARIABLES - DARK THEME (DEFAULT) ========== */
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111;
+            --bg-card: #1a1a1a;
+            --bg-navbar: rgba(10, 10, 10, 0.95);
+            --text-primary: #fff;
+            --text-secondary: #aaa;
+            --text-muted: #666;
+            --border-color: rgba(255, 255, 255, 0.05);
+            --shadow-color: rgba(230, 57, 70, 0.2);
+            --hero-gradient: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            --theme-color: #e63946;
+            --theme-hover: #c62836;
+        }
+
+        /* ========== BLUE THEME ========== */
+        body.blue-theme {
+            --bg-primary: #0a1628;
+            --bg-secondary: #0f1f3d;
+            --bg-card: #142b4a;
+            --bg-navbar: rgba(10, 22, 40, 0.95);
+            --text-primary: #e8f0fe;
+            --text-secondary: #a8c4e0;
+            --text-muted: #6a8fba;
+            --border-color: rgba(52, 152, 219, 0.2);
+            --shadow-color: rgba(52, 152, 219, 0.3);
+            --hero-gradient: linear-gradient(135deg, #0a1628 0%, #0f1f3d 50%, #142b4a 100%);
+            --theme-color: #3498db;
+            --theme-hover: #2176ae;
+        }
+
+        /* ========== RESET & BASE ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .highlight {
+            color: var(--theme-color);
+        }
+
+        .section-tag {
+            color: var(--theme-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 14px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 40px;
+            font-weight: 800;
+            margin: 10px 0;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        /* ========== BUTTONS ========== */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--theme-color);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: var(--theme-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--shadow-color);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--theme-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--theme-color);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .btn-lg {
+            padding: 16px 36px;
+            font-size: 17px;
+        }
+
+        .btn-sm {
+            padding: 8px 18px;
+            font-size: 13px;
+        }
+
+        /* ========== THEME TOGGLE BUTTON ========== */
+        .theme-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background: var(--theme-color);
+            color: #fff;
+            transform: rotate(30deg);
+        }
+
+        /* ========== NAVBAR ========== */
+        .navbar {
+            background: var(--bg-navbar);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            transition: background 0.5s ease, border-color 0.5s ease;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+        }
+
+        .logo-text {
+            color: var(--text-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--theme-color);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--theme-color);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .cart-btn {
+            position: relative;
+            font-size: 20px;
+            color: var(--text-primary);
+            transition: color 0.3s;
+        }
+
+        .cart-btn:hover {
+            color: var(--theme-color);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: var(--theme-color);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
+        /* ========== CONTACT HERO ========== */
+        .contact-hero {
+            padding: 60px 0 40px;
+            background: var(--hero-gradient);
+            text-align: center;
+            transition: background 0.5s ease;
+        }
+
+        .contact-hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .contact-hero p {
+            color: var(--text-secondary);
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ========== CONTACT INFO ========== */
+        .contact-info {
+            padding: 60px 0 40px;
+            background: var(--bg-secondary);
+            transition: background 0.5s ease;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .info-card {
+            background: var(--bg-card);
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--theme-color);
+            box-shadow: 0 10px 30px var(--shadow-color);
+        }
+
+        .info-card i {
+            font-size: 40px;
+            color: var(--theme-color);
+            margin-bottom: 15px;
+        }
+
+        .info-card h4 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .info-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .info-card a {
+            color: var(--text-secondary);
+            transition: color 0.3s;
+        }
+
+        .info-card a:hover {
+            color: var(--theme-color);
+        }
+
+        /* ========== CONTACT FORM & MAP ========== */
+        .contact-main {
+            padding: 60px 0 80px;
+            background: var(--bg-primary);
+            transition: background 0.5s ease;
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        /* ========== CONTACT FORM ========== */
+        .contact-form {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-form h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .contact-form p {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+        }
+
+        .contact-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .contact-form .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .contact-form .form-group input,
+        .contact-form .form-group textarea,
+        .contact-form .form-group select {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+        .contact-form .form-group input:focus,
+        .contact-form .form-group textarea:focus,
+        .contact-form .form-group select:focus {
+            outline: none;
+            border-color: var(--theme-color);
+            box-shadow: 0 0 20px var(--shadow-color);
+        }
+
+        .contact-form .form-group textarea {
+            height: 130px;
+            resize: vertical;
+        }
+
+        .contact-form .form-group select option {
+            background: var(--bg-card);
+        }
+
+        .contact-form .submit-btn {
+            width: 100%;
+            padding: 16px;
+            font-size: 18px;
+        }
+
+        /* ========== MAP ========== */
+        .contact-map {
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            height: 100%;
+            min-height: 450px;
+        }
+
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 450px;
+            border: none;
+        }
+
+        /* ========== BUSINESS HOURS ========== */
+        .business-hours {
+            padding: 60px 0;
+            background: var(--bg-secondary);
+            transition: background 0.5s ease;
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .hours-card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .hours-card i {
+            font-size: 35px;
+            color: var(--theme-color);
+            margin-bottom: 15px;
+        }
+
+        .hours-card h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .hours-card .day {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .hours-card .time {
+            color: var(--text-primary);
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .hours-card .status {
+            display: inline-block;
+            padding: 4px 15px;
+            border-radius: 15px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .hours-card .status.open {
+            background: #27ae60;
+            color: #fff;
+        }
+
+        .hours-card .status.closed {
+            background: #e63946;
+            color: #fff;
+        }
+
+        /* ========== TOAST ========== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--theme-color);
+            color: #fff;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            z-index: 9999;
+            animation: slideUp 0.5s ease;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background: var(--bg-primary);
+            padding: 60px 0 20px;
+            border-top: 1px solid var(--border-color);
+            transition: background 0.5s ease, border-color 0.5s ease;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin: 15px 0;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-card);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .social-links a:hover {
+            background: var(--theme-color);
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        .footer-col h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .footer-col ul li {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li:hover {
+            color: var(--theme-color);
+        }
+
+        .footer-col ul li i {
+            margin-right: 8px;
+            color: var(--theme-color);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 992px) {
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-map {
+                min-height: 350px;
+            }
+
+            .contact-map iframe {
+                min-height: 350px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background: var(--bg-card);
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                padding: 20px;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .nav-actions .btn-outline,
+            .nav-actions .btn-primary {
+                display: none;
+            }
+
+            .contact-hero h1 {
+                font-size: 32px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .contact-form {
+                padding: 25px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 30px;
+            }
+
+            .hours-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                padding: 20px;
+            }
+        }
+
+        /* ========== SCROLL REVEAL ANIMATION ========== */
+        .reveal-init {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal-init.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-init.reveal-stagger.revealed { transition-delay: var(--reveal-delay, 0s); }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal-init { opacity: 1; transform: none; transition: none; }
+        }
+    </style>
+</head>
+<body>
+
+   <!-- ==================== NAVBAR ==================== -->
+<!-- ==================== NAVBAR ==================== -->
+<nav class="navbar">
+    <div class="container">
+        <div class="logo">
+            <span class="logo-icon">🍽️</span>
+            <span class="logo-text">Taste<span class="highlight">Hub</span></span>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="deals.html">Deals</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button class="theme-toggle" id="themeToggle" title="Switch Theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <a href="cart.html" class="cart-btn">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="navCartCount">0</span>
+            </a>
+            <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+            <a href="login.html" class="btn btn-primary btn-sm">Sign Up</a>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <!-- ==================== CONTACT HERO ==================== -->
+    <section class="contact-hero">
+        <div class="container">
+            <span class="section-tag">Contact Us</span>
+            <h1>Get in <span class="highlight">Touch</span></h1>
+            <p>Have questions, feedback, or want to place a special order? We'd love to hear from you!</p>
+        </div>
+    </section>
+
+    <!-- ==================== CONTACT INFO ==================== -->
+    <section class="contact-info">
+        <div class="container">
+            <div class="info-grid reveal-stagger">
+                <div class="info-card reveal-init">
+                    <i class="fas fa-phone-alt"></i>
+                    <h4>Phone</h4>
+                    <p><a href="tel:+923001234567">+92 300 1234567</a></p>
+                    <p style="font-size: 13px; color: var(--text-muted);">Mon-Sat: 11AM - 11PM</p>
+                </div>
+                <div class="info-card reveal-init">
+                    <i class="fab fa-whatsapp"></i>
+                    <h4>WhatsApp</h4>
+                    <p><a href="https://wa.me/923001234567" target="_blank">+92 300 1234567</a></p>
+                    <p style="font-size: 13px; color: var(--text-muted);">Quick orders & support</p>
+                </div>
+                <div class="info-card reveal-init">
+                    <i class="fas fa-envelope"></i>
+                    <h4>Email</h4>
+                    <p><a href="mailto:info@tastehub.com">info@tastehub.com</a></p>
+                    <p style="font-size: 13px; color: var(--text-muted);">We'll reply within 24 hours</p>
+                </div>
+                <div class="info-card reveal-init">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h4>Location</h4>
+                    <p><strong>Hafizabad, Pakistan</strong></p>
+                    <p style="font-size: 13px; color: var(--text-muted);">Find us on the map below</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CONTACT FORM & MAP ==================== -->
+    <section class="contact-main">
+        <div class="container">
+            <div class="contact-wrapper">
+                <!-- ===== CONTACT FORM ===== -->
+                <div class="contact-form">
+                    <h3>Send Us a <span class="highlight">Message</span></h3>
+                    <p>We'd love to hear from you! Fill in the form below and we'll get back to you soon.</p>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text" id="contactName" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="contactEmail" placeholder="Enter your email address" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" id="contactPhone" placeholder="Enter your phone number">
+                        </div>
+                        <div class="form-group">
+                            <label>Subject</label>
+                            <select id="contactSubject">
+                                <option value="General Inquiry">General Inquiry</option>
+                                <option value="Order Issue">Order Issue</option>
+                                <option value="Feedback">Feedback</option>
+                                <option value="Special Order">Special Order</option>
+                                <option value="Catering">Catering</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea id="contactMessage" placeholder="Write your message here..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary submit-btn">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- ===== MAP - HAFIZABAD LOCATION ===== -->
+                <div class="contact-map">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d27127.979850095836!2d73.664195!3d32.071644!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391f1c0cf2f6f16b%3A0x33ed5af5db58d7d4!2sHafizabad%2C%20Punjab%2C%20Pakistan!5e0!3m2!1sen!2s!4v1700000000000" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== BUSINESS HOURS ==================== -->
+    <section class="business-hours">
+        <div class="container">
+            <div class="section-header reveal-init">
+                <span class="section-tag">Opening Hours</span>
+                <h2>When We're <span class="highlight">Open</span></h2>
+                <p>Visit us during our business hours or order online anytime!</p>
+            </div>
+            <div class="hours-grid reveal-stagger">
+                <div class="hours-card reveal-init">
+                    <i class="fas fa-clock"></i>
+                    <h4>Monday - Friday</h4>
+                    <div class="day">Lunch & Dinner</div>
+                    <div class="time">11:00 AM - 11:00 PM</div>
+                    <span class="status open">🟢 Open</span>
+                </div>
+                <div class="hours-card reveal-init">
+                    <i class="fas fa-clock"></i>
+                    <h4>Saturday - Sunday</h4>
+                    <div class="day">Lunch & Dinner</div>
+                    <div class="time">12:00 PM - 12:00 AM</div>
+                    <span class="status open">🟢 Open</span>
+                </div>
+                <div class="hours-card reveal-init">
+                    <i class="fas fa-truck"></i>
+                    <h4>Delivery Hours</h4>
+                    <div class="day">Delivery available</div>
+                    <div class="time">11:00 AM - 10:00 PM</div>
+                    <span class="status open">🟢 Open</span>
+                </div>
+                <div class="hours-card reveal-init">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h4>Holidays</h4>
+                    <div class="day">Special hours may apply</div>
+                    <div class="time">Check our social media</div>
+                    <span class="status closed">🔴 Check</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo">
+                        <span class="logo-icon">🍽️</span>
+                        <span class="logo-text">Taste<span class="highlight">Hub</span></span>
+                    </div>
+                    <p>Delivering happiness through food. Taste the difference.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="reviews.html">Reviews</a></li>
+                        <li><a href="cart.html">Cart</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +92 300 1234567</li>
+                        <li><i class="fab fa-whatsapp"></i> WhatsApp</li>
+                        <li><i class="fas fa-envelope"></i> info@tastehub.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Hafizabad, Pakistan</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Opening Hours</h4>
+                    <ul>
+                        <li>Mon - Fri: 11:00 AM - 11:00 PM</li>
+                        <li>Sat - Sun: 12:00 PM - 12:00 AM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 TasteHub. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ========== CART COUNT FROM LOCAL STORAGE ==========
+        function updateNavCartCount() {
+            const savedCart = localStorage.getItem('tastehubCart');
+            let total = 0;
+            if (savedCart) {
+                const cart = JSON.parse(savedCart);
+                total = cart.reduce((sum, item) => sum + item.quantity, 0);
+            }
+            document.getElementById('navCartCount').textContent = total;
+        }
+
+        // ========== CONTACT FORM SUBMIT ==========
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('contactName').value.trim();
+            const email = document.getElementById('contactEmail').value.trim();
+            const phone = document.getElementById('contactPhone').value.trim();
+            const subject = document.getElementById('contactSubject').value;
+            const message = document.getElementById('contactMessage').value.trim();
+
+            if (!name || !email || !message) {
+                showToast('⚠️ Please fill in all required fields!');
+                return;
+            }
+
+            showToast('✅ Thank you! Your message has been sent successfully! 🎉');
+
+            this.reset();
+
+            console.log('📧 New Contact Message:', {
+                name, email, phone, subject, message
+            });
+
+            alert(`
+📧 Message Sent Successfully!
+
+👤 Name: ${name}
+📧 Email: ${email}
+📞 Phone: ${phone || 'Not provided'}
+📋 Subject: ${subject}
+📝 Message: ${message}
+
+We'll get back to you within 24 hours!
+Thank you for contacting TasteHub! 🍽️
+            `);
+        });
+
+        // ========== TOAST NOTIFICATION ==========
+        function showToast(message) {
+            const existing = document.querySelector('.toast');
+            if (existing) existing.remove();
+
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s';
+                setTimeout(() => toast.remove(), 500);
+            }, 3500);
+        }
+
+        // ========== THEME TOGGLE (DARK ↔ BLUE) ==========
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+
+        if (localStorage.getItem('theme') === 'blue') {
+            body.classList.add('blue-theme');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('blue-theme');
+            if (body.classList.contains('blue-theme')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'blue');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // ========== HAMBURGER MENU ==========
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        // ========== SMOOTH SCROLL ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href !== '') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                        navLinks.classList.remove('open');
+                    }
+                }
+            });
+        });
+
+        // ========== NAVBAR SCROLL EFFECT ==========
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+            }
+        });
+
+        // ========== ACTIVE NAV LINK ==========
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                navLinks.classList.remove('open');
+            });
+        });
+
+        // ========== INITIALIZE ==========
+        updateNavCartCount();
+
+        console.log('📞 Welcome to TasteHub Contact Page - Hafizabad Location! 🇵🇰');
+    </script>
+
+
+    <script>
+        // ========== SCROLL REVEAL OBSERVER (added) ==========
+        (function () {
+            var revealObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+            function observeReveals(root) {
+                (root || document).querySelectorAll('.reveal-init:not(.revealed)').forEach(function (el) {
+                    revealObserver.observe(el);
+                });
+            }
+
+            function stagger(root) {
+                (root || document).querySelectorAll('.reveal-stagger').forEach(function (group) {
+                    Array.prototype.forEach.call(group.children, function (child, i) {
+                        if (child.classList && child.classList.contains('reveal-init')) {
+                            child.style.setProperty('--reveal-delay', (i * 0.08) + 's');
+                        }
+                    });
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                stagger();
+                observeReveals();
+            });
+
+            // Re-scan for dynamically rendered content (menu items, cart items, reviews, etc.)
+            var bodyObserver = new MutationObserver(function () {
+                stagger();
+                observeReveals();
+            });
+            bodyObserver.observe(document.body, { childList: true, subtree: true });
+        })();
+    </script>
+</body>
+</html>

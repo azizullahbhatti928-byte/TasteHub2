@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TasteHub - Our Menu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========== ROOT VARIABLES - DARK THEME (DEFAULT) ========== */
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111;
+            --bg-card: #1a1a1a;
+            --bg-navbar: rgba(10, 10, 10, 0.95);
+            --text-primary: #fff;
+            --text-secondary: #aaa;
+            --text-muted: #666;
+            --border-color: rgba(255, 255, 255, 0.05);
+            --shadow-color: rgba(230, 57, 70, 0.2);
+            --hero-gradient: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            --card-hover-shadow: rgba(230, 57, 70, 0.15);
+            --theme-color: #e63946;
+            --theme-hover: #c62836;
+            --search-bg: rgba(255, 255, 255, 0.05);
+            --filter-bg: rgba(255, 255, 255, 0.03);
+        }
+
+        /* ========== BLUE THEME ========== */
+        body.blue-theme {
+            --bg-primary: #0a1628;
+            --bg-secondary: #0f1f3d;
+            --bg-card: #142b4a;
+            --bg-navbar: rgba(10, 22, 40, 0.95);
+            --text-primary: #e8f0fe;
+            --text-secondary: #a8c4e0;
+            --text-muted: #6a8fba;
+            --border-color: rgba(52, 152, 219, 0.2);
+            --shadow-color: rgba(52, 152, 219, 0.3);
+            --hero-gradient: linear-gradient(135deg, #0a1628 0%, #0f1f3d 50%, #142b4a 100%);
+            --card-hover-shadow: rgba(52, 152, 219, 0.25);
+            --theme-color: #3498db;
+            --theme-hover: #2176ae;
+            --search-bg: rgba(52, 152, 219, 0.1);
+            --filter-bg: rgba(52, 152, 219, 0.08);
+        }
+
+        /* ========== RESET & BASE ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .highlight {
+            color: var(--theme-color);
+        }
+
+        .section-tag {
+            color: var(--theme-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 14px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-size: 40px;
+            font-weight: 800;
+            margin: 10px 0;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        /* ========== BUTTONS ========== */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--theme-color);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: var(--theme-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--shadow-color);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--theme-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--theme-color);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .btn-sm {
+            padding: 8px 18px;
+            font-size: 13px;
+        }
+
+        /* ========== THEME TOGGLE BUTTON ========== */
+        .theme-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background: var(--theme-color);
+            color: #fff;
+            transform: rotate(30deg);
+        }
+
+        /* ========== NAVBAR ========== */
+        .navbar {
+            background: var(--bg-navbar);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            transition: background 0.5s ease, border-color 0.5s ease;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+        }
+
+        .logo-text {
+            color: var(--text-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--theme-color);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--theme-color);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .cart-btn {
+            position: relative;
+            font-size: 20px;
+            color: var(--text-primary);
+            transition: color 0.3s;
+        }
+
+        .cart-btn:hover {
+            color: var(--theme-color);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: var(--theme-color);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
+        /* ========== MENU HERO ========== */
+        .menu-hero {
+            padding: 60px 0 40px;
+            background: var(--hero-gradient);
+            text-align: center;
+            transition: background 0.5s ease;
+        }
+
+        .menu-hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .menu-hero p {
+            color: var(--text-secondary);
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ========== SEARCH & FILTER ========== */
+        .search-filter {
+            padding: 30px 0;
+            background: var(--bg-secondary);
+            transition: background 0.5s ease;
+        }
+
+        .search-filter .container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 14px 20px 14px 50px;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+            background: var(--search-bg);
+            color: var(--text-primary);
+            font-size: 15px;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--theme-color);
+            box-shadow: 0 0 20px var(--shadow-color);
+        }
+
+        .search-box input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 18px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 22px;
+            border-radius: 25px;
+            border: 1px solid var(--border-color);
+            background: var(--filter-bg);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--theme-color);
+            color: #fff;
+            border-color: var(--theme-color);
+            transform: translateY(-2px);
+        }
+
+        /* ========== MENU ITEMS ========== */
+        .menu-items {
+            padding: 60px 0 80px;
+            background: var(--bg-primary);
+            transition: background 0.5s ease;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 30px;
+        }
+
+        .menu-item {
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-8px);
+            border-color: var(--theme-color);
+            box-shadow: 0 15px 40px var(--shadow-color);
+        }
+
+        .menu-item-image {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .menu-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .menu-item:hover .menu-item-image img {
+            transform: scale(1.05);
+        }
+
+        .menu-item-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--theme-color);
+            color: #fff;
+            padding: 4px 14px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .menu-item-badge.veg {
+            background: #27ae60;
+        }
+
+        .menu-item-badge.spicy {
+            background: #e67e22;
+        }
+
+        .menu-item-badge.popular {
+            background: #e63946;
+        }
+
+        .menu-item-badge.new {
+            background: #8e44ad;
+        }
+
+        .menu-item-info {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .menu-item-header h3 {
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .menu-item-price {
+            color: var(--theme-color);
+            font-weight: 700;
+            font-size: 20px;
+            white-space: nowrap;
+            margin-left: 15px;
+        }
+
+        .menu-item-desc {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            flex: 1;
+        }
+
+        .menu-item-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .menu-item-rating {
+            color: #ffd700;
+            font-size: 14px;
+        }
+
+        .menu-item-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .menu-item-actions .btn-sm {
+            padding: 8px 16px;
+        }
+
+        .qty-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qty-btn:hover {
+            background: var(--theme-color);
+            color: #fff;
+            border-color: var(--theme-color);
+        }
+
+        .qty-display {
+            font-weight: 600;
+            min-width: 25px;
+            text-align: center;
+            color: var(--text-primary);
+        }
+
+        /* ========== NO RESULTS ========== */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
+        }
+
+        .no-results i {
+            font-size: 60px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .no-results h3 {
+            font-size: 24px;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .no-results.hidden {
+            display: none;
+        }
+
+        /* ========== TOAST ========== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--theme-color);
+            color: #fff;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            z-index: 9999;
+            animation: slideUp 0.5s ease;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background: var(--bg-primary);
+            padding: 60px 0 20px;
+            border-top: 1px solid var(--border-color);
+            transition: background 0.5s ease, border-color 0.5s ease;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin: 15px 0;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-card);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .social-links a:hover {
+            background: var(--theme-color);
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        .footer-col h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .footer-col ul li {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li:hover {
+            color: var(--theme-color);
+        }
+
+        .footer-col ul li i {
+            margin-right: 8px;
+            color: var(--theme-color);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .menu-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background: var(--bg-card);
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                padding: 20px;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .nav-actions .btn-outline,
+            .nav-actions .btn-primary {
+                display: none;
+            }
+
+            .menu-hero h1 {
+                font-size: 32px;
+            }
+
+            .search-filter .container {
+                flex-direction: column;
+            }
+
+            .search-box {
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .filter-buttons {
+                justify-content: center;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .menu-item-header {
+                flex-direction: column;
+            }
+
+            .menu-item-price {
+                margin-left: 0;
+                margin-top: 5px;
+            }
+
+            .menu-item-footer {
+                flex-direction: column;
+                gap: 12px;
+                align-items: stretch;
+            }
+
+            .menu-item-actions {
+                justify-content: space-between;
+            }
+        }
+
+        /* ========== SCROLL REVEAL ANIMATION ========== */
+        .reveal-init {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal-init.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-init.reveal-stagger.revealed { transition-delay: var(--reveal-delay, 0s); }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal-init { opacity: 1; transform: none; transition: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== NAVBAR ==================== -->
+<nav class="navbar">
+    <div class="container">
+        <div class="logo">
+            <span class="logo-icon">🍽️</span>
+            <span class="logo-text">Taste<span class="highlight">Hub</span></span>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html" class="active">Menu</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="deals.html">Deals</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button class="theme-toggle" id="themeToggle" title="Switch Theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <a href="cart.html" class="cart-btn">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="navCartCount">0</span>
+            </a>
+            <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+            <a href="login.html" class="btn btn-primary btn-sm">Sign Up</a>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <!-- ==================== MENU HERO ==================== -->
+    <section class="menu-hero reveal-init">
+        <div class="container">
+            <span class="section-tag">Our Menu</span>
+            <h1>Explore Our <span class="highlight">Delicious</span> Dishes</h1>
+            <p>Handcrafted with love and the finest ingredients. Find your favorite meal below.</p>
+        </div>
+    </section>
+
+    <!-- ==================== SEARCH & FILTER ==================== -->
+    <section class="search-filter">
+        <div class="container">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search for dishes... (e.g. Burger, Pizza)">
+            </div>
+            <div class="filter-buttons" id="filterButtons">
+                <button class="filter-btn active" data-filter="all">🍽️ All</button>
+                <button class="filter-btn" data-filter="burger">🍔 Burgers</button>
+                <button class="filter-btn" data-filter="pizza">🍕 Pizza</button>
+                <button class="filter-btn" data-filter="chicken">🍗 Chicken</button>
+                <button class="filter-btn" data-filter="bbq">🥩 BBQ</button>
+                <button class="filter-btn" data-filter="fastfood">🍟 Fast Food</button>
+                <button class="filter-btn" data-filter="drinks">🥤 Drinks</button>
+                <button class="filter-btn" data-filter="desserts">🍰 Desserts</button>
+                <button class="filter-btn" data-filter="salads">🥗 Salads</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== MENU ITEMS ==================== -->
+    <section class="menu-items">
+        <div class="container">
+            <div class="menu-grid reveal-stagger" id="menuGrid">
+                <!-- Items will be rendered by JavaScript -->
+            </div>
+            <div class="no-results hidden" id="noResults">
+                <i class="fas fa-utensils"></i>
+                <h3>No dishes found</h3>
+                <p>Try searching for something else or check back later!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo">
+                        <span class="logo-icon">🍽️</span>
+                        <span class="logo-text">Taste<span class="highlight">Hub</span></span>
+                    </div>
+                    <p>Delivering happiness through food. Taste the difference.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +92 300 1234567</li>
+                        <li><i class="fab fa-whatsapp"></i> WhatsApp</li>
+                        <li><i class="fas fa-envelope"></i> info@tastehub.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Hafizabad, Pakistan</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Opening Hours</h4>
+                    <ul>
+                        <li>Mon - Fri: 11:00 AM - 11:00 PM</li>
+                        <li>Sat - Sun: 12:00 PM - 12:00 AM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 TasteHub. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ========== MENU DATA - ALL PRICES IN PKR ==========
+        const menuItems = [
+            // ===== BURGERS =====
+            {
+                id: 1,
+                name: "Classic Beef Burger",
+                category: "burger",
+                price: 1899,
+                description: "Juicy beef patty with fresh lettuce, tomato, caramelized onions, and special sauce.",
+                image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop",
+                rating: 4.9,
+                reviews: 120,
+                badge: "🔥 Best Seller",
+                badgeType: "popular"
+            },
+            {
+                id: 2,
+                name: "Double Cheese Burger",
+                category: "burger",
+                price: 2499,
+                description: "Two beef patties with double cheddar cheese, crispy bacon, and tangy sauce.",
+                image: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400&h=300&fit=crop",
+                rating: 4.8,
+                reviews: 95,
+                badge: "⭐ Customer Favorite",
+                badgeType: "popular"
+            },
+            {
+                id: 3,
+                name: "Veggie Delight Burger",
+                category: "burger",
+                price: 1599,
+                description: "Grilled veggie patty with avocado, roasted peppers, and garlic aioli.",
+                image: "https://images.unsplash.com/photo-1520072959219-c595dc870360?w=400&h=300&fit=crop",
+                rating: 4.5,
+                reviews: 60,
+                badge: "🌱 Vegetarian",
+                badgeType: "veg"
+            },
+
+            // ===== PIZZA =====
+            {
+                id: 4,
+                name: "Pepperoni Pizza",
+                category: "pizza",
+                price: 2199,
+                description: "Classic pepperoni with mozzarella cheese, tomato sauce, and Italian herbs.",
+                image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop",
+                rating: 4.8,
+                reviews: 95,
+                badge: "⭐ Chef's Choice",
+                badgeType: "popular"
+            },
+            {
+                id: 5,
+                name: "Margherita Pizza",
+                category: "pizza",
+                price: 1799,
+                description: "Fresh mozzarella, basil leaves, tomato sauce, and extra virgin olive oil.",
+                image: "https://images.unsplash.com/photo-1574071318508-1cdbed80c682?w=400&h=300&fit=crop",
+                rating: 4.7,
+                reviews: 80,
+                badge: "🌱 Vegetarian",
+                badgeType: "veg"
+            },
+            {
+                id: 6,
+                name: "BBQ Chicken Pizza",
+                category: "pizza",
+                price: 2499,
+                description: "Grilled chicken, BBQ sauce, red onions, cilantro, and mozzarella cheese.",
+                image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=300&fit=crop",
+                rating: 4.9,
+                reviews: 110,
+                badge: "🔥 Special",
+                badgeType: "popular"
+            },
+
+            // ===== CHICKEN =====
+            {
+                id: 7,
+                name: "Crispy Fried Chicken",
+                category: "chicken",
+                price: 1999,
+                description: "Golden fried chicken with special herbs, served with garlic dip.",
+                image: "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=400&h=300&fit=crop",
+                rating: 4.6,
+                reviews: 70,
+                badge: "🍗 Crispy",
+                badgeType: "popular"
+            },
+            {
+                id: 8,
+                name: "Grilled Chicken Breast",
+                category: "chicken",
+                price: 2199,
+                description: "Tender grilled chicken breast with roasted vegetables and lemon butter sauce.",
+                image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop",
+                rating: 4.7,
+                reviews: 55,
+                badge: "🔥 Healthy Choice",
+                badgeType: "new"
+            },
+            {
+                id: 9,
+                name: "Chicken Wings Platter",
+                category: "chicken",
+                price: 2499,
+                description: "Spicy chicken wings with BBQ dip, celery sticks, and carrot sticks.",
+                image: "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=400&h=300&fit=crop",
+                rating: 4.8,
+                reviews: 90,
+                badge: "🌶️ Spicy",
+                badgeType: "spicy"
+            },
+
+            // ===== BBQ =====
+            {
+                id: 10,
+                name: "BBQ Chicken Platter",
+                category: "bbq",
+                price: 2799,
+                description: "Grilled chicken with smoky BBQ sauce, roasted vegetables, and corn on the cob.",
+                image: "https://images.unsplash.com/photo-1587593810167-a84920ea0781?w=400&h=300&fit=crop",
+                rating: 4.7,
+                reviews: 80,
+                badge: "🔴 Special",
+                badgeType: "popular"
+            },
+            {
+                id: 11,
+                name: "Smoked Ribs",
+                category: "bbq",
+                price: 3499,
+                description: "Slow-smoked pork ribs with homemade BBQ sauce and coleslaw.",
+                image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=300&fit=crop",
+                rating: 4.9,
+                reviews: 130,
+                badge: "🔥 Best Seller",
+                badgeType: "popular"
+            },
+
+            // ===== FAST FOOD =====
+            {
+                id: 12,
+                name: "French Fries",
+                category: "fastfood",
+                price: 799,
+                description: "Crispy golden fries with sea salt and choice of dip.",
+                image: "https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?w=400&h=300&fit=crop",
+                rating: 4.5,
+                reviews: 65,
+                badge: "🍟 Classic",
+                badgeType: "veg"
+            },
+            {
+                id: 13,
+                name: "Chicken Nuggets",
+                category: "fastfood",
+                price: 999,
+                description: "Crispy chicken nuggets with sweet and sour sauce.",
+                image: "https://images.unsplash.com/photo-1562967914-608f82629710?w=400&h=300&fit=crop",
+                rating: 4.4,
+                reviews: 50,
+                badge: "🍗 Kids Favorite",
+                badgeType: "popular"
+            },
+            {
+                id: 14,
+                name: "Onion Rings",
+                category: "fastfood",
+                price: 899,
+                description: "Crispy onion rings with spicy mayo dip.",
+                image: "https://images.unsplash.com/photo-1639024471283-5ffd54b7b7b4?w=400&h=300&fit=crop",
+                rating: 4.3,
+                reviews: 40,
+                badge: "🌱 Vegetarian",
+                badgeType: "veg"
+            },
+
+            // ===== DRINKS =====
+            {
+                id: 15,
+                name: "Fresh Lemonade",
+                category: "drinks",
+                price: 499,
+                description: "Freshly squeezed lemonade with mint and ice.",
+                image: "https://images.unsplash.com/photo-1621263764928-df1444c5e859?w=400&h=300&fit=crop",
+                rating: 4.6,
+                reviews: 45,
+                badge: "🥤 Refreshing",
+                badgeType: "new"
+            },
+            {
+                id: 16,
+                name: "Chocolate Shake",
+                category: "drinks",
+                price: 799,
+                description: "Rich chocolate milkshake with whipped cream and chocolate syrup.",
+                image: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400&h=300&fit=crop",
+                rating: 4.8,
+                reviews: 75,
+                badge: "⭐ Popular",
+                badgeType: "popular"
+            },
+            {
+                id: 17,
+                name: "Fresh Juice",
+                category: "drinks",
+                price: 599,
+                description: "Freshly squeezed seasonal fruit juice with ice.",
+                image: "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&h=300&fit=crop",
+                rating: 4.5,
+                reviews: 40,
+                badge: "🥤 Healthy",
+                badgeType: "veg"
+            },
+
+            // ===== DESSERTS =====
+            {
+                id: 18,
+                name: "Chocolate Brownie",
+                category: "desserts",
+                price: 999,
+                description: "Warm chocolate brownie with vanilla ice cream and chocolate sauce.",
+                image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&h=300&fit=crop",
+                rating: 4.9,
+                reviews: 100,
+                badge: "🍫 Heavenly",
+                badgeType: "popular"
+            },
+            {
+                id: 19,
+                name: "Cheesecake",
+                category: "desserts",
+                price: 1199,
+                description: "Creamy New York cheesecake with berry topping.",
+                image: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=400&h=300&fit=crop",
+                rating: 4.7,
+                reviews: 85,
+                badge: "🍰 Classic",
+                badgeType: "new"
+            },
+
+            // ===== SALADS =====
+            {
+                id: 20,
+                name: "Caesar Salad",
+                category: "salads",
+                price: 1299,
+                description: "Crisp romaine lettuce, parmesan cheese, croutons, and Caesar dressing.",
+                image: "https://images.unsplash.com/photo-1550304943-4f24f54dd87a?w=400&h=300&fit=crop",
+                rating: 4.5,
+                reviews: 50,
+                badge: "🥗 Healthy",
+                badgeType: "veg"
+            },
+            {
+                id: 21,
+                name: "Greek Salad",
+                category: "salads",
+                price: 1499,
+                description: "Fresh tomatoes, cucumbers, olives, feta cheese, and Greek dressing.",
+                image: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&h=300&fit=crop",
+                rating: 4.6,
+                reviews: 55,
+                badge: "🌱 Vegetarian",
+                badgeType: "veg"
+            }
+        ];
+
+        // ========== CART FUNCTIONS (Global) ==========
+        let cart = [];
+
+        function loadCartFromStorage() {
+            const savedCart = localStorage.getItem('tastehubCart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+            } else {
+                cart = [];
+            }
+            updateCartCount();
+        }
+
+        function saveCartToStorage() {
+            localStorage.setItem('tastehubCart', JSON.stringify(cart));
+            updateCartCount();
+        }
+
+        function updateCartCount() {
+            const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.querySelectorAll('.cart-count').forEach(el => {
+                el.textContent = total;
+            });
+        }
+
+        function addToCart(itemId, quantity) {
+            if (!quantity) quantity = 1;
+            
+            const existingItem = cart.find(item => item.id === itemId);
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({ id: itemId, quantity: quantity });
+            }
+            
+            saveCartToStorage();
+            
+            const item = menuItems.find(i => i.id === itemId);
+            showToast(`✅ Added ${item.name} (×${quantity}) to cart!`);
+        }
+
+        // ========== FORMAT PRICE IN PKR ==========
+        function formatPrice(price) {
+            return 'Rs. ' + price.toLocaleString('en-PK');
+        }
+
+        // ========== RENDER MENU ITEMS ==========
+        function renderMenuItems(items) {
+            const grid = document.getElementById('menuGrid');
+            const noResults = document.getElementById('noResults');
+
+            if (items.length === 0) {
+                grid.innerHTML = '';
+                noResults.classList.remove('hidden');
+                return;
+            }
+
+            noResults.classList.add('hidden');
+
+            grid.innerHTML = items.map(item => `
+                <div class="menu-item" data-category="${item.category}">
+                    <div class="menu-item-image">
+                        <img src="${item.image}" alt="${item.name}" loading="lazy">
+                        <span class="menu-item-badge ${item.badgeType}">${item.badge}</span>
+                    </div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3>${item.name}</h3>
+                            <span class="menu-item-price">${formatPrice(item.price)}</span>
+                        </div>
+                        <p class="menu-item-desc">${item.description}</p>
+                        <div class="menu-item-footer">
+                            <span class="menu-item-rating">⭐ ${item.rating} (${item.reviews})</span>
+                            <div class="menu-item-actions">
+                                <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">−</button>
+                                <span class="qty-display" id="qty-${item.id}">0</span>
+                                <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                                <button class="btn btn-primary btn-sm add-to-cart" data-id="${item.id}">
+                                    <i class="fas fa-plus"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Re-attach cart listeners
+            document.querySelectorAll('.add-to-cart').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const id = parseInt(this.dataset.id);
+                    const qtyDisplay = document.getElementById(`qty-${id}`);
+                    let qty = parseInt(qtyDisplay.textContent);
+                    if (qty === 0) {
+                        qty = 1;
+                        qtyDisplay.textContent = qty;
+                    }
+                    addToCart(id, qty);
+                    qtyDisplay.textContent = 0; // Reset quantity after adding
+                });
+            });
+        }
+
+        // ========== QUANTITY UPDATE ==========
+        function updateQuantity(id, change) {
+            const display = document.getElementById(`qty-${id}`);
+            let current = parseInt(display.textContent);
+            let newQty = Math.max(0, current + change);
+            display.textContent = newQty;
+        }
+
+        // ========== TOAST NOTIFICATION ==========
+        function showToast(message) {
+            const existing = document.querySelector('.toast');
+            if (existing) existing.remove();
+
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s';
+                setTimeout(() => toast.remove(), 500);
+            }, 2500);
+        }
+
+        // ========== SEARCH & FILTER ==========
+        const searchInput = document.getElementById('searchInput');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        let currentFilter = 'all';
+        let currentSearch = '';
+
+        function filterItems() {
+            let filtered = menuItems;
+
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(item => item.category === currentFilter);
+            }
+
+            if (currentSearch.trim() !== '') {
+                const query = currentSearch.toLowerCase().trim();
+                filtered = filtered.filter(item =>
+                    item.name.toLowerCase().includes(query) ||
+                    item.description.toLowerCase().includes(query) ||
+                    item.category.toLowerCase().includes(query)
+                );
+            }
+
+            renderMenuItems(filtered);
+        }
+
+        searchInput.addEventListener('input', function() {
+            currentSearch = this.value;
+            filterItems();
+        });
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentFilter = this.dataset.filter;
+                filterItems();
+            });
+        });
+
+        // ========== THEME TOGGLE (DARK ↔ BLUE) ==========
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+
+        if (localStorage.getItem('theme') === 'blue') {
+            body.classList.add('blue-theme');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('blue-theme');
+            if (body.classList.contains('blue-theme')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'blue');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // ========== HAMBURGER MENU ==========
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        // ========== NAVBAR SCROLL EFFECT ==========
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+            }
+        });
+
+        // ========== ACTIVE NAV LINK ==========
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                navLinks.classList.remove('open');
+            });
+        });
+
+        // ========== INITIALIZE ==========
+        loadCartFromStorage();
+        renderMenuItems(menuItems);
+
+        console.log('🍽️ Welcome to TasteHub Menu Page - Cart Connected! 🇵🇰');
+        console.log('🛒 Cart items:', cart.length);
+    </script>
+
+
+    <script>
+        // ========== SCROLL REVEAL OBSERVER (added) ==========
+        (function () {
+            var revealObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+            function observeReveals(root) {
+                (root || document).querySelectorAll('.reveal-init:not(.revealed)').forEach(function (el) {
+                    revealObserver.observe(el);
+                });
+            }
+
+            function stagger(root) {
+                (root || document).querySelectorAll('.reveal-stagger').forEach(function (group) {
+                    Array.prototype.forEach.call(group.children, function (child, i) {
+                        if (child.classList && child.classList.contains('reveal-init')) {
+                            child.style.setProperty('--reveal-delay', (i * 0.08) + 's');
+                        }
+                    });
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                stagger();
+                observeReveals();
+            });
+
+            // Re-scan for dynamically rendered content (menu items, cart items, reviews, etc.)
+            var bodyObserver = new MutationObserver(function () {
+                stagger();
+                observeReveals();
+            });
+            bodyObserver.observe(document.body, { childList: true, subtree: true });
+        })();
+    </script>
+</body>
+</html>

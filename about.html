@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TasteHub - About Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========== ROOT VARIABLES - DARK THEME (DEFAULT) ========== */
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111;
+            --bg-card: #1a1a1a;
+            --bg-navbar: rgba(10, 10, 10, 0.95);
+            --text-primary: #fff;
+            --text-secondary: #aaa;
+            --text-muted: #666;
+            --border-color: rgba(255, 255, 255, 0.05);
+            --shadow-color: rgba(230, 57, 70, 0.2);
+            --hero-gradient: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            --theme-color: #e63946;
+            --theme-hover: #c62836;
+        }
+
+        /* ========== BLUE THEME ========== */
+        body.blue-theme {
+            --bg-primary: #0a1628;
+            --bg-secondary: #0f1f3d;
+            --bg-card: #142b4a;
+            --bg-navbar: rgba(10, 22, 40, 0.95);
+            --text-primary: #e8f0fe;
+            --text-secondary: #a8c4e0;
+            --text-muted: #6a8fba;
+            --border-color: rgba(52, 152, 219, 0.2);
+            --shadow-color: rgba(52, 152, 219, 0.3);
+            --hero-gradient: linear-gradient(135deg, #0a1628 0%, #0f1f3d 50%, #142b4a 100%);
+            --theme-color: #3498db;
+            --theme-hover: #2176ae;
+        }
+
+        /* ========== RESET & BASE ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .highlight {
+            color: var(--theme-color);
+        }
+
+        .section-tag {
+            color: var(--theme-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 14px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 40px;
+            font-weight: 800;
+            margin: 10px 0;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        /* ========== BUTTONS ========== */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--theme-color);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: var(--theme-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--shadow-color);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--theme-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--theme-color);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .btn-lg {
+            padding: 16px 36px;
+            font-size: 17px;
+        }
+
+        .btn-sm {
+            padding: 8px 18px;
+            font-size: 13px;
+        }
+
+        /* ========== THEME TOGGLE BUTTON ========== */
+        .theme-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background: var(--theme-color);
+            color: #fff;
+            transform: rotate(30deg);
+        }
+
+        /* ========== NAVBAR ========== */
+        .navbar {
+            background: var(--bg-navbar);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            transition: background 0.5s ease, border-color 0.5s ease;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+        }
+
+        .logo-text {
+            color: var(--text-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--theme-color);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--theme-color);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .cart-btn {
+            position: relative;
+            font-size: 20px;
+            color: var(--text-primary);
+            transition: color 0.3s;
+        }
+
+        .cart-btn:hover {
+            color: var(--theme-color);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: var(--theme-color);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
+        /* ========== ABOUT HERO ========== */
+        .about-hero {
+            padding: 60px 0 40px;
+            background: var(--hero-gradient);
+            text-align: center;
+            transition: background 0.5s ease;
+        }
+
+        .about-hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .about-hero p {
+            color: var(--text-secondary);
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ========== ABOUT STORY ========== */
+        .about-story {
+            padding: 80px 0;
+            background: var(--bg-primary);
+            transition: background 0.5s ease;
+        }
+
+        .about-story .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-story-content h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin: 10px 0 20px;
+        }
+
+        .about-story-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .about-story-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px var(--shadow-color);
+            transition: box-shadow 0.5s ease;
+        }
+
+        /* ========== MISSION & VISION ========== */
+        .mission-vision {
+            padding: 80px 0;
+            background: var(--bg-secondary);
+            transition: background 0.5s ease;
+        }
+
+        .mv-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+        }
+
+        .mv-card {
+            background: var(--bg-card);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .mv-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--theme-color);
+            box-shadow: 0 15px 40px var(--shadow-color);
+        }
+
+        .mv-card i {
+            font-size: 50px;
+            color: var(--theme-color);
+            margin-bottom: 20px;
+        }
+
+        .mv-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .mv-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ========== WHY CHOOSE US - 3 PER LINE ========== */
+        .why-choose {
+            padding: 80px 0;
+            background: var(--bg-primary);
+            transition: background 0.5s ease;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .why-card {
+            background: var(--bg-card);
+            padding: 30px 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .why-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--theme-color);
+        }
+
+        .why-card .icon {
+            width: 70px;
+            height: 70px;
+            background: var(--theme-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 30px;
+            color: #fff;
+        }
+
+        .why-card h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .why-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* ========== TEAM ========== */
+        .team {
+            padding: 80px 0;
+            background: var(--bg-secondary);
+            transition: background 0.5s ease;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .team-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--theme-color);
+            box-shadow: 0 15px 40px var(--shadow-color);
+        }
+
+        .team-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .team-card .info {
+            padding: 20px;
+        }
+
+        .team-card .info h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .team-card .info span {
+            color: var(--theme-color);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .team-card .info p {
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+
+        /* ========== STATS ========== */
+        .stats {
+            padding: 60px 0;
+            background: var(--hero-gradient);
+            transition: background 0.5s ease;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stats-grid .stat-number {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--theme-color);
+        }
+
+        .stats-grid .stat-label {
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-top: 5px;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background: var(--bg-primary);
+            padding: 60px 0 20px;
+            border-top: 1px solid var(--border-color);
+            transition: background 0.5s ease, border-color 0.5s ease;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin: 15px 0;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-card);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .social-links a:hover {
+            background: var(--theme-color);
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        .footer-col h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .footer-col ul li {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li:hover {
+            color: var(--theme-color);
+        }
+
+        .footer-col ul li i {
+            margin-right: 8px;
+            color: var(--theme-color);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 992px) {
+            .about-story .container {
+                grid-template-columns: 1fr;
+            }
+
+            .mv-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            /* 3 se 2 per line on tablet */
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background: var(--bg-card);
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                padding: 20px;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .nav-actions .btn-outline,
+            .nav-actions .btn-primary {
+                display: none;
+            }
+
+            .about-hero h1 {
+                font-size: 32px;
+            }
+
+            .mv-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 30px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+
+            .stats-grid .stat-number {
+                font-size: 32px;
+            }
+
+            /* 3 se 1 per line on mobile */
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========== SCROLL REVEAL ANIMATION ========== */
+        .reveal-init {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal-init.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-init.reveal-stagger.revealed { transition-delay: var(--reveal-delay, 0s); }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal-init { opacity: 1; transform: none; transition: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== NAVBAR ==================== -->
+<nav class="navbar">
+    <div class="container">
+        <div class="logo">
+            <span class="logo-icon">🍽️</span>
+            <span class="logo-text">Taste<span class="highlight">Hub</span></span>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="deals.html">Deals</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button class="theme-toggle" id="themeToggle" title="Switch Theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <a href="cart.html" class="cart-btn">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="navCartCount">0</span>
+            </a>
+            <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+            <a href="login.html" class="btn btn-primary btn-sm">Sign Up</a>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </div>
+</nav>
+    <!-- ==================== ABOUT HERO ==================== -->
+    <section class="about-hero">
+        <div class="container">
+            <span class="section-tag">About Us</span>
+            <h1>Know More About <span class="highlight">TasteHub</span></h1>
+            <p>Where passion meets flavor. Discover the story behind our kitchen and the people who make it all happen.</p>
+        </div>
+    </section>
+
+    <!-- ==================== OUR STORY ==================== -->
+    <section class="about-story">
+        <div class="container">
+            <div class="about-story-content">
+                <span class="section-tag">Our Story</span>
+                <h2>How <span class="highlight">TasteHub</span> Was Born</h2>
+                <p>
+                    TasteHub started with a simple dream – to bring people together through the love of good food. 
+                    Founded in 2020, our journey began in a small kitchen with a big vision: to serve meals that 
+                    not only taste amazing but also tell a story of passion, quality, and care.
+                </p>
+                <p>
+                    Today, we are proud to be one of the most loved restaurants in Pakistan, serving thousands of 
+                    happy customers every day. From our signature burgers to our mouth-watering BBQ platters, 
+                    every dish is crafted with the freshest ingredients and a whole lot of love.
+                </p>
+                <p>
+                    We believe that food is more than just fuel – it's an experience, a memory, and a way to connect 
+                    with the people we care about. That's why we pour our hearts into every plate we serve.
+                </p>
+                <a href="menu.html" class="btn btn-primary">Explore Our Menu <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="about-story-image">
+                <!-- ===== PAKISTANI STYLE RESTAURANT IMAGE ===== -->
+                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&h=400&fit=crop" alt="Pakistani Restaurant">
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== MISSION & VISION ==================== -->
+    <section class="mission-vision">
+        <div class="container">
+            <div class="section-header reveal-init">
+                <span class="section-tag">Our Purpose</span>
+                <h2>Mission, Vision & <span class="highlight">Values</span></h2>
+                <p>What drives us every day to serve you better</p>
+            </div>
+            <div class="mv-grid reveal-stagger">
+                <div class="mv-card reveal-init">
+                    <i class="fas fa-bullseye"></i>
+                    <h3>Our Mission</h3>
+                    <p>To deliver exceptional dining experiences by serving high-quality, flavorful food that brings joy to every customer.</p>
+                </div>
+                <div class="mv-card reveal-init">
+                    <i class="fas fa-eye"></i>
+                    <h3>Our Vision</h3>
+                    <p>To become Pakistan's most loved restaurant brand, known for innovation, quality, and a commitment to culinary excellence.</p>
+                </div>
+                <div class="mv-card reveal-init">
+                    <i class="fas fa-heart"></i>
+                    <h3>Our Values</h3>
+                    <p>Quality, integrity, innovation, and customer satisfaction are at the core of everything we do.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== WHY CHOOSE US - 3 PER LINE ==================== -->
+    <section class="why-choose">
+        <div class="container">
+            <div class="section-header reveal-init">
+                <span class="section-tag">Why Choose Us</span>
+                <h2>What Makes <span class="highlight">TasteHub</span> Special</h2>
+                <p>Here's why our customers keep coming back</p>
+            </div>
+            <div class="why-grid reveal-stagger">
+                <div class="why-card reveal-init">
+                    <div class="icon"><i class="fas fa-leaf"></i></div>
+                    <h4>Fresh Ingredients</h4>
+                    <p>We source only the freshest, highest-quality ingredients for every dish we prepare.</p>
+                </div>
+                <div class="why-card reveal-init">
+                    <div class="icon"><i class="fas fa-star"></i></div>
+                    <h4>Expert Chefs</h4>
+                    <p>Our team of skilled chefs brings years of experience and creativity to the kitchen.</p>
+                </div>
+                <div class="why-card reveal-init">
+                    <div class="icon"><i class="fas fa-clock"></i></div>
+                    <h4>Fast Delivery</h4>
+                    <p>We ensure your food arrives hot, fresh, and on time – every single time.</p>
+                </div>
+                <div class="why-card reveal-init">
+                    <div class="icon"><i class="fas fa-rupee-sign"></i></div>
+                    <h4>Affordable Prices</h4>
+                    <p>Great food shouldn't cost a fortune. We offer premium quality at pocket-friendly prices.</p>
+                </div>
+                <div class="why-card reveal-init">
+                    <div class="icon"><i class="fas fa-hand-sparkles"></i></div>
+                    <h4>Hygiene First</h4>
+                    <p>We maintain the highest standards of cleanliness and food safety in our kitchen.</p>
+                </div>
+                <div class="why-card reveal-init">
+                    <div class="icon"><i class="fas fa-smile"></i></div>
+                    <h4>Customer Love</h4>
+                    <p>We treat every customer like family and go the extra mile to make you happy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TEAM - PAKISTANI CHEFS ==================== -->
+    <section class="team">
+        <div class="container">
+            <div class="section-header reveal-init">
+                <span class="section-tag">Our Team</span>
+                <h2>Meet Our <span class="highlight">Passionate</span> Chefs</h2>
+                <p>The talented people behind your favorite meals</p>
+            </div>
+            <div class="team-grid reveal-stagger">
+                <!-- ===== PAKISTANI CHEF 1 ===== -->
+                <div class="team-card reveal-init">
+                    <img src="https://images.unsplash.com/photo-1583394293214-28ded15ee548?w=400&h=300&fit=crop&crop=face" alt="Pakistani Chef Ali Raza">
+                    <div class="info">
+                        <h4>Chef Ali Raza</h4>
+                        <span>Head Chef</span>
+                        <p>15+ years of culinary experience. Specializes in Pakistani BBQ and Continental cuisine.</p>
+                    </div>
+                </div>
+                <!-- ===== PAKISTANI CHEF 2 ===== -->
+                <div class="team-card reveal-init">
+                    <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=400&h=300&fit=crop&crop=face" alt="Pakistani Chef Fatima Khan">
+                    <div class="info">
+                        <h4>Chef Fatima Khan</h4>
+                        <span>Pastry Chef</span>
+                        <p>Expert in desserts and baking. Creates our delicious cakes, pastries, and sweet treats.</p>
+                    </div>
+                </div>
+                <!-- ===== PAKISTANI CHEF 3 ===== -->
+                <div class="team-card reveal-init">
+                    <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=400&h=300&fit=crop&crop=face" alt="Pakistani Chef Usman Ahmed">
+                    <div class="info">
+                        <h4>Chef Usman Ahmed</h4>
+                        <span>Grill Master</span>
+                        <p>Specializes in grilled meats, BBQ, and tandoori dishes with authentic Pakistani flavors.</p>
+                    </div>
+                </div>
+                <!-- ===== PAKISTANI CHEF 4 ===== -->
+                <div class="team-card reveal-init">
+                    <img src="https://images.unsplash.com/photo-1581299894007-aaa50297cf16?w=400&h=300&fit=crop&crop=face" alt="Pakistani Chef Sara Malik">
+                    <div class="info">
+                        <h4>Chef Sara Malik</h4>
+                        <span>Italian Specialist</span>
+                        <p>Expert in Italian cuisine. Creates our signature pizzas, pastas, and sauces with a Pakistani twist.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== STATS ==================== -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid reveal-stagger">
+                <div>
+                    <div class="stat-number" id="counter1">0</div>
+                    <div class="stat-label">Happy Customers</div>
+                </div>
+                <div>
+                    <div class="stat-number" id="counter2">0</div>
+                    <div class="stat-label">Dishes Served</div>
+                </div>
+                <div>
+                    <div class="stat-number" id="counter3">0</div>
+                    <div class="stat-label">Expert Chefs</div>
+                </div>
+                <div>
+                    <div class="stat-number" id="counter4">0</div>
+                    <div class="stat-label">5-Star Reviews</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo">
+                        <span class="logo-icon">🍽️</span>
+                        <span class="logo-text">Taste<span class="highlight">Hub</span></span>
+                    </div>
+                    <p>Delivering happiness through food. Taste the difference.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +92 300 1234567</li>
+                        <li><i class="fab fa-whatsapp"></i> WhatsApp</li>
+                        <li><i class="fas fa-envelope"></i> info@tastehub.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Karachi, Pakistan</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Opening Hours</h4>
+                    <ul>
+                        <li>Mon - Fri: 11:00 AM - 11:00 PM</li>
+                        <li>Sat - Sun: 12:00 PM - 12:00 AM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 TasteHub. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ========== THEME TOGGLE (DARK ↔ BLUE) ==========
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+
+        if (localStorage.getItem('theme') === 'blue') {
+            body.classList.add('blue-theme');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('blue-theme');
+            if (body.classList.contains('blue-theme')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'blue');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // ========== HAMBURGER MENU ==========
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        // ========== SMOOTH SCROLL ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href !== '') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                        navLinks.classList.remove('open');
+                    }
+                }
+            });
+        });
+
+        // ========== NAVBAR SCROLL EFFECT ==========
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+            }
+        });
+
+        // ========== ANIMATED COUNTERS ==========
+        function animateCounter(el, target, suffix = '') {
+            let current = 0;
+            const increment = Math.ceil(target / 80);
+            const interval = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(interval);
+                }
+                el.textContent = current.toLocaleString() + suffix;
+            }, 30);
+        }
+
+        // Run counters when stats section is visible
+        let countersAnimated = false;
+
+        function startCounters() {
+            if (countersAnimated) return;
+            const statsSection = document.querySelector('.stats');
+            const rect = statsSection.getBoundingClientRect();
+            if (rect.top < window.innerHeight) {
+                countersAnimated = true;
+                animateCounter(document.getElementById('counter1'), 5000, '+');
+                animateCounter(document.getElementById('counter2'), 15000, '+');
+                animateCounter(document.getElementById('counter3'), 20, '+');
+                animateCounter(document.getElementById('counter4'), 1200, '+');
+            }
+        }
+
+        window.addEventListener('scroll', startCounters);
+        window.addEventListener('load', startCounters);
+
+        // ========== ACTIVE NAV LINK ==========
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                navLinks.classList.remove('open');
+            });
+        });
+
+        console.log('🍽️ Welcome to TasteHub About Page! 🇵🇰');
+    </script>
+
+
+    <script>
+        // ========== SCROLL REVEAL OBSERVER (added) ==========
+        (function () {
+            var revealObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+            function observeReveals(root) {
+                (root || document).querySelectorAll('.reveal-init:not(.revealed)').forEach(function (el) {
+                    revealObserver.observe(el);
+                });
+            }
+
+            function stagger(root) {
+                (root || document).querySelectorAll('.reveal-stagger').forEach(function (group) {
+                    Array.prototype.forEach.call(group.children, function (child, i) {
+                        if (child.classList && child.classList.contains('reveal-init')) {
+                            child.style.setProperty('--reveal-delay', (i * 0.08) + 's');
+                        }
+                    });
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                stagger();
+                observeReveals();
+            });
+
+            // Re-scan for dynamically rendered content (menu items, cart items, reviews, etc.)
+            var bodyObserver = new MutationObserver(function () {
+                stagger();
+                observeReveals();
+            });
+            bodyObserver.observe(document.body, { childList: true, subtree: true });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TasteHub - Login / Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========== ROOT VARIABLES - DARK THEME (DEFAULT) ========== */
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111;
+            --bg-card: #1a1a1a;
+            --bg-navbar: rgba(10, 10, 10, 0.95);
+            --text-primary: #fff;
+            --text-secondary: #aaa;
+            --text-muted: #666;
+            --border-color: rgba(255, 255, 255, 0.05);
+            --shadow-color: rgba(230, 57, 70, 0.2);
+            --hero-gradient: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            --theme-color: #e63946;
+            --theme-hover: #c62836;
+        }
+
+        /* ========== BLUE THEME ========== */
+        body.blue-theme {
+            --bg-primary: #0a1628;
+            --bg-secondary: #0f1f3d;
+            --bg-card: #142b4a;
+            --bg-navbar: rgba(10, 22, 40, 0.95);
+            --text-primary: #e8f0fe;
+            --text-secondary: #a8c4e0;
+            --text-muted: #6a8fba;
+            --border-color: rgba(52, 152, 219, 0.2);
+            --shadow-color: rgba(52, 152, 219, 0.3);
+            --hero-gradient: linear-gradient(135deg, #0a1628 0%, #0f1f3d 50%, #142b4a 100%);
+            --theme-color: #3498db;
+            --theme-hover: #2176ae;
+        }
+
+        /* ========== RESET & BASE ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            transition: background 0.5s ease, color 0.5s ease;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .highlight {
+            color: var(--theme-color);
+        }
+
+        /* ========== BUTTONS ========== */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--theme-color);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: var(--theme-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--shadow-color);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--theme-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--theme-color);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .btn-lg {
+            padding: 16px 36px;
+            font-size: 17px;
+        }
+
+        .btn-sm {
+            padding: 8px 18px;
+            font-size: 13px;
+        }
+
+        /* ========== THEME TOGGLE BUTTON ========== */
+        .theme-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background: var(--theme-color);
+            color: #fff;
+            transform: rotate(30deg);
+        }
+
+        /* ========== NAVBAR ========== */
+        .navbar {
+            background: var(--bg-navbar);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            transition: background 0.5s ease, border-color 0.5s ease;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+        }
+
+        .logo-text {
+            color: var(--text-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--theme-color);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--theme-color);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .cart-btn {
+            position: relative;
+            font-size: 20px;
+            color: var(--text-primary);
+            transition: color 0.3s;
+        }
+
+        .cart-btn:hover {
+            color: var(--theme-color);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: var(--theme-color);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
+        /* ========== LOGIN/REGISTER SECTION ========== */
+        .auth-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            background: var(--bg-secondary);
+            transition: background 0.5s ease;
+        }
+
+        .auth-wrapper {
+            max-width: 500px;
+            width: 100%;
+            background: var(--bg-card);
+            border-radius: 25px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 60px var(--shadow-color);
+            transition: background 0.5s ease, border-color 0.5s ease;
+        }
+
+        /* ========== AUTH HEADER ========== */
+        .auth-header {
+            background: var(--hero-gradient);
+            padding: 30px 30px 20px;
+            text-align: center;
+            transition: background 0.5s ease;
+        }
+
+        .auth-header .big-icon {
+            font-size: 50px;
+            color: var(--theme-color);
+            margin-bottom: 10px;
+        }
+
+        .auth-header h2 {
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .auth-header p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* ========== TABS ========== */
+        .auth-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .auth-tabs .tab-btn {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .auth-tabs .tab-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .auth-tabs .tab-btn.active {
+            color: var(--theme-color);
+        }
+
+        .auth-tabs .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--theme-color);
+        }
+
+        /* ========== AUTH FORMS ========== */
+        .auth-body {
+            padding: 30px;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .auth-form .form-group {
+            margin-bottom: 18px;
+        }
+
+        .auth-form .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .auth-form .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .auth-form .form-group input:focus {
+            outline: none;
+            border-color: var(--theme-color);
+            box-shadow: 0 0 20px var(--shadow-color);
+        }
+
+        .auth-form .form-group .password-wrapper {
+            position: relative;
+        }
+
+        .auth-form .form-group .password-wrapper input {
+            padding-right: 45px;
+        }
+
+        .auth-form .form-group .password-wrapper .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .auth-form .form-group .password-wrapper .toggle-password:hover {
+            color: var(--theme-color);
+        }
+
+        .auth-form .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .auth-form .form-options label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .auth-form .form-options label input[type="checkbox"] {
+            accent-color: var(--theme-color);
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .auth-form .form-options a {
+            color: var(--theme-color);
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .auth-form .form-options a:hover {
+            color: var(--theme-hover);
+            text-decoration: underline;
+        }
+
+        .auth-form .submit-btn {
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+        }
+
+        .auth-form .social-login {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .auth-form .social-login p {
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .auth-form .social-login p::before,
+        .auth-form .social-login p::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .auth-form .social-login p::before {
+            left: 0;
+        }
+
+        .auth-form .social-login p::after {
+            right: 0;
+        }
+
+        .auth-form .social-login .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .auth-form .social-login .social-icons a {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--text-primary);
+            transition: all 0.3s;
+        }
+
+        .auth-form .social-login .social-icons a:hover {
+            transform: translateY(-3px);
+            border-color: var(--theme-color);
+        }
+
+        .auth-form .social-login .social-icons a.facebook:hover {
+            background: #1877f2;
+            color: #fff;
+            border-color: #1877f2;
+        }
+
+        .auth-form .social-login .social-icons a.google:hover {
+            background: #ea4335;
+            color: #fff;
+            border-color: #ea4335;
+        }
+
+        .auth-form .social-login .social-icons a.apple:hover {
+            background: #555;
+            color: #fff;
+            border-color: #555;
+        }
+
+        /* ========== TOAST ========== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--theme-color);
+            color: #fff;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            z-index: 9999;
+            animation: slideUp 0.5s ease;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background: var(--bg-primary);
+            padding: 40px 0 20px;
+            border-top: 1px solid var(--border-color);
+            transition: background 0.5s ease, border-color 0.5s ease;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-col p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin: 15px 0;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-card);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .social-links a:hover {
+            background: var(--theme-color);
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        .footer-col h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .footer-col ul li {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li:hover {
+            color: var(--theme-color);
+        }
+
+        .footer-col ul li i {
+            margin-right: 8px;
+            color: var(--theme-color);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background: var(--bg-card);
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                padding: 20px;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .nav-actions .btn-outline,
+            .nav-actions .btn-primary {
+                display: none;
+            }
+
+            .auth-section {
+                padding: 30px 15px;
+            }
+
+            .auth-body {
+                padding: 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .auth-form .form-options {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .auth-header {
+                padding: 20px;
+            }
+
+            .auth-header h2 {
+                font-size: 20px;
+            }
+
+            .auth-body {
+                padding: 15px;
+            }
+
+            .auth-tabs .tab-btn {
+                font-size: 14px;
+                padding: 12px;
+            }
+        }
+
+        /* ========== SCROLL REVEAL ANIMATION ========== */
+        .reveal-init {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal-init.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-init.reveal-stagger.revealed { transition-delay: var(--reveal-delay, 0s); }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal-init { opacity: 1; transform: none; transition: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">🍽️</span>
+                <span class="logo-text">Taste<span class="highlight">Hub</span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="deals.html">Deals</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" title="Switch Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> <span class="cart-count" id="navCartCount">0</span></a>
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="login.html" class="btn btn-primary">Sign Up</a>
+                <div class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== LOGIN / REGISTER SECTION ==================== -->
+    <section class="auth-section">
+        <div class="auth-wrapper reveal-init">
+
+            <!-- ===== HEADER ===== -->
+            <div class="auth-header">
+                <div class="big-icon">🍽️</div>
+                <h2>Welcome to <span class="highlight">TasteHub</span></h2>
+                <p>Sign in to your account or create a new one</p>
+            </div>
+
+            <!-- ===== TABS ===== -->
+            <div class="auth-tabs">
+                <button class="tab-btn active" data-tab="login" onclick="switchTab('login')">
+                    <i class="fas fa-sign-in-alt"></i> Sign In
+                </button>
+                <button class="tab-btn" data-tab="register" onclick="switchTab('register')">
+                    <i class="fas fa-user-plus"></i> Sign Up
+                </button>
+            </div>
+
+            <!-- ===== BODY ===== -->
+            <div class="auth-body">
+
+                <!-- ===== LOGIN FORM ===== -->
+                <div class="auth-form active" id="loginForm">
+                    <form id="loginFormSubmit">
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Password</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                                <button type="button" class="toggle-password" onclick="togglePassword('loginPassword', 'loginIcon')">
+                                    <i class="fas fa-eye" id="loginIcon"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-options">
+                            <label>
+                                <input type="checkbox" id="rememberMe"> Remember Me
+                            </label>
+                            <a href="#" onclick="showToast('🔑 Password reset link sent to your email!')">Forgot Password?</a>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary submit-btn">
+                            <i class="fas fa-sign-in-alt"></i> Sign In
+                        </button>
+                    </form>
+
+                    <div class="social-login">
+                        <p>Or continue with</p>
+                        <div class="social-icons">
+                            <a href="#" class="facebook" onclick="showToast('🔵 Facebook login coming soon!')"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="google" onclick="showToast('🔴 Google login coming soon!')"><i class="fab fa-google"></i></a>
+                            <a href="#" class="apple" onclick="showToast('⚫ Apple login coming soon!')"><i class="fab fa-apple"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== REGISTER FORM ===== -->
+                <div class="auth-form" id="registerForm">
+                    <form id="registerFormSubmit">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" id="regName" placeholder="Enter your full name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="regEmail" placeholder="Enter your email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" id="regPhone" placeholder="Enter your phone number">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Password</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="regPassword" placeholder="Create a password (min 6 characters)" required>
+                                <button type="button" class="toggle-password" onclick="togglePassword('regPassword', 'regIcon')">
+                                    <i class="fas fa-eye" id="regIcon"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="regConfirmPassword" placeholder="Confirm your password" required>
+                                <button type="button" class="toggle-password" onclick="togglePassword('regConfirmPassword', 'regConfirmIcon')">
+                                    <i class="fas fa-eye" id="regConfirmIcon"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-options">
+                            <label>
+                                <input type="checkbox" id="agreeTerms" required> I agree to the <a href="#" style="color: var(--theme-color);">Terms & Conditions</a>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary submit-btn">
+                            <i class="fas fa-user-plus"></i> Create Account
+                        </button>
+                    </form>
+
+                    <div class="social-login">
+                        <p>Or sign up with</p>
+                        <div class="social-icons">
+                            <a href="#" class="facebook" onclick="showToast('🔵 Facebook sign up coming soon!')"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="google" onclick="showToast('🔴 Google sign up coming soon!')"><i class="fab fa-google"></i></a>
+                            <a href="#" class="apple" onclick="showToast('⚫ Apple sign up coming soon!')"><i class="fab fa-apple"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo">
+                        <span class="logo-icon">🍽️</span>
+                        <span class="logo-text">Taste<span class="highlight">Hub</span></span>
+                    </div>
+                    <p>Delivering happiness through food. Taste the difference.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +92 300 1234567</li>
+                        <li><i class="fab fa-whatsapp"></i> WhatsApp</li>
+                        <li><i class="fas fa-envelope"></i> info@tastehub.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Hafizabad, Pakistan</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Opening Hours</h4>
+                    <ul>
+                        <li>Mon - Fri: 11:00 AM - 11:00 PM</li>
+                        <li>Sat - Sun: 12:00 PM - 12:00 AM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 TasteHub. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ========== SWITCH TABS ==========
+        function switchTab(tab) {
+            // Update tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.tab === tab);
+            });
+
+            // Update forms
+            document.querySelectorAll('.auth-form').forEach(form => {
+                form.classList.remove('active');
+            });
+            document.getElementById(tab === 'login' ? 'loginForm' : 'registerForm').classList.add('active');
+        }
+
+        // ========== TOGGLE PASSWORD ==========
+        function togglePassword(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // ========== LOGIN FORM SUBMIT ==========
+        document.getElementById('loginFormSubmit').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value.trim();
+            const remember = document.getElementById('rememberMe').checked;
+
+            if (!email || !password) {
+                showToast('⚠️ Please fill in all fields!');
+                return;
+            }
+
+            if (password.length < 6) {
+                showToast('⚠️ Password must be at least 6 characters!');
+                return;
+            }
+
+            showToast('✅ Login successful! Welcome back! 🎉');
+
+            localStorage.setItem('tastehubUser', JSON.stringify({
+                email: email,
+                loggedIn: true
+            }));
+
+            this.reset();
+
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500);
+        });
+
+        // ========== REGISTER FORM SUBMIT ==========
+        document.getElementById('registerFormSubmit').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('regName').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const phone = document.getElementById('regPhone').value.trim();
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('regConfirmPassword').value;
+            const agree = document.getElementById('agreeTerms').checked;
+
+            if (!name || !email || !password || !confirmPassword) {
+                showToast('⚠️ Please fill in all required fields!');
+                return;
+            }
+
+            if (password.length < 6) {
+                showToast('⚠️ Password must be at least 6 characters!');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showToast('⚠️ Passwords do not match!');
+                return;
+            }
+
+            if (!agree) {
+                showToast('⚠️ Please agree to the Terms & Conditions!');
+                return;
+            }
+
+            showToast('🎉 Account created successfully! Welcome to TasteHub!');
+
+            // Save user data
+            localStorage.setItem('tastehubUser', JSON.stringify({
+                name: name,
+                email: email,
+                phone: phone,
+                loggedIn: true
+            }));
+
+            this.reset();
+
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500);
+        });
+
+        // ========== CART COUNT FROM LOCAL STORAGE ==========
+        function updateNavCartCount() {
+            const savedCart = localStorage.getItem('tastehubCart');
+            let total = 0;
+            if (savedCart) {
+                const cart = JSON.parse(savedCart);
+                total = cart.reduce((sum, item) => sum + item.quantity, 0);
+            }
+            document.getElementById('navCartCount').textContent = total;
+        }
+
+        // ========== TOAST NOTIFICATION ==========
+        function showToast(message) {
+            const existing = document.querySelector('.toast');
+            if (existing) existing.remove();
+
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s';
+                setTimeout(() => toast.remove(), 500);
+            }, 3500);
+        }
+
+        // ========== THEME TOGGLE (DARK ↔ BLUE) ==========
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+
+        if (localStorage.getItem('theme') === 'blue') {
+            body.classList.add('blue-theme');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('blue-theme');
+            if (body.classList.contains('blue-theme')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'blue');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // ========== HAMBURGER MENU ==========
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        // ========== SMOOTH SCROLL ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href !== '') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                        navLinks.classList.remove('open');
+                    }
+                }
+            });
+        });
+
+        // ========== NAVBAR SCROLL EFFECT ==========
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+            }
+        });
+
+        // ========== ACTIVE NAV LINK ==========
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                navLinks.classList.remove('open');
+            });
+        });
+
+        // ========== CHECK IF USER ALREADY LOGGED IN ==========
+        const savedUser = localStorage.getItem('tastehubUser');
+        if (savedUser) {
+            try {
+                const user = JSON.parse(savedUser);
+                if (user.loggedIn) {
+                    console.log('👤 User already logged in:', user.email || user.name);
+                }
+            } catch (e) {
+                console.log('Error parsing user data');
+            }
+        }
+
+        // ========== INITIALIZE ==========
+        updateNavCartCount();
+
+        console.log('🔐 Welcome to TasteHub Login/Register Page! 🇵🇰');
+    </script>
+
+
+    <script>
+        // ========== SCROLL REVEAL OBSERVER (added) ==========
+        (function () {
+            var revealObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+            function observeReveals(root) {
+                (root || document).querySelectorAll('.reveal-init:not(.revealed)').forEach(function (el) {
+                    revealObserver.observe(el);
+                });
+            }
+
+            function stagger(root) {
+                (root || document).querySelectorAll('.reveal-stagger').forEach(function (group) {
+                    Array.prototype.forEach.call(group.children, function (child, i) {
+                        if (child.classList && child.classList.contains('reveal-init')) {
+                            child.style.setProperty('--reveal-delay', (i * 0.08) + 's');
+                        }
+                    });
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                stagger();
+                observeReveals();
+            });
+
+            // Re-scan for dynamically rendered content (menu items, cart items, reviews, etc.)
+            var bodyObserver = new MutationObserver(function () {
+                stagger();
+                observeReveals();
+            });
+            bodyObserver.observe(document.body, { childList: true, subtree: true });
+        })();
+    </script>
+</body>
+</html>

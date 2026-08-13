@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TasteHub - Special Deals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========== ROOT VARIABLES - DARK THEME (DEFAULT) ========== */
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111;
+            --bg-card: #1a1a1a;
+            --bg-navbar: rgba(10, 10, 10, 0.95);
+            --text-primary: #fff;
+            --text-secondary: #aaa;
+            --text-muted: #666;
+            --border-color: rgba(255, 255, 255, 0.05);
+            --shadow-color: rgba(230, 57, 70, 0.2);
+            --hero-gradient: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            --theme-color: #e63946;
+            --theme-hover: #c62836;
+        }
+
+        /* ========== BLUE THEME ========== */
+        body.blue-theme {
+            --bg-primary: #0a1628;
+            --bg-secondary: #0f1f3d;
+            --bg-card: #142b4a;
+            --bg-navbar: rgba(10, 22, 40, 0.95);
+            --text-primary: #e8f0fe;
+            --text-secondary: #a8c4e0;
+            --text-muted: #6a8fba;
+            --border-color: rgba(52, 152, 219, 0.2);
+            --shadow-color: rgba(52, 152, 219, 0.3);
+            --hero-gradient: linear-gradient(135deg, #0a1628 0%, #0f1f3d 50%, #142b4a 100%);
+            --theme-color: #3498db;
+            --theme-hover: #2176ae;
+        }
+
+        /* ========== RESET & BASE ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            transition: background 0.5s ease, color 0.5s ease;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .highlight {
+            color: var(--theme-color);
+        }
+
+        .section-tag {
+            color: var(--theme-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 14px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 40px;
+            font-weight: 800;
+            margin: 10px 0;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        /* ========== BUTTONS ========== */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--theme-color);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: var(--theme-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--shadow-color);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--theme-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--theme-color);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .btn-sm {
+            padding: 8px 18px;
+            font-size: 13px;
+        }
+
+        /* ========== THEME TOGGLE BUTTON ========== */
+        .theme-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background: var(--theme-color);
+            color: #fff;
+            transform: rotate(30deg);
+        }
+
+        /* ========== NAVBAR ========== */
+        .navbar {
+            background: var(--bg-navbar);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            transition: background 0.5s ease, border-color 0.5s ease;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+        }
+
+        .logo-text {
+            color: var(--text-primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--theme-color);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--theme-color);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .cart-btn {
+            position: relative;
+            font-size: 20px;
+            color: var(--text-primary);
+            transition: color 0.3s;
+        }
+
+        .cart-btn:hover {
+            color: var(--theme-color);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: var(--theme-color);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
+        /* ========== DEALS HERO ========== */
+        .deals-hero {
+            padding: 60px 0 40px;
+            background: var(--hero-gradient);
+            text-align: center;
+            transition: background 0.5s ease;
+        }
+
+        .deals-hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .deals-hero p {
+            color: var(--text-secondary);
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ========== DEALS FILTER ========== */
+        .deals-filter {
+            padding: 30px 0;
+            background: var(--bg-secondary);
+            transition: background 0.5s ease;
+        }
+
+        .deals-filter .container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 25px;
+            border-radius: 25px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--theme-color);
+            color: #fff;
+            border-color: var(--theme-color);
+            transform: translateY(-2px);
+        }
+
+        /* ========== DEALS GRID ========== */
+        .deals-section {
+            padding: 60px 0 80px;
+            background: var(--bg-primary);
+            transition: background 0.5s ease;
+            flex: 1;
+        }
+
+        .deals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 30px;
+        }
+
+        .deal-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .deal-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--theme-color);
+            box-shadow: 0 15px 40px var(--shadow-color);
+        }
+
+        .deal-card .discount-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--theme-color);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: 700;
+            z-index: 2;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .deal-card .deal-image {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .deal-card .deal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .deal-card:hover .deal-image img {
+            transform: scale(1.05);
+        }
+
+        .deal-card .deal-image .deal-tag {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: 30px 20px 15px;
+        }
+
+        .deal-card .deal-image .deal-tag .deal-type {
+            display: inline-block;
+            background: var(--theme-color);
+            color: #fff;
+            padding: 3px 14px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .deal-card .deal-info {
+            padding: 20px;
+        }
+
+        .deal-card .deal-info .deal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .deal-card .deal-info .deal-header h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .deal-card .deal-info .deal-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .deal-card .deal-info .deal-price .original {
+            color: var(--text-muted);
+            font-size: 16px;
+            text-decoration: line-through;
+        }
+
+        .deal-card .deal-info .deal-price .discounted {
+            color: var(--theme-color);
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .deal-card .deal-info p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .deal-card .deal-info .deal-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .deal-card .deal-info .deal-footer .deal-validity {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .deal-card .deal-info .deal-footer .deal-validity i {
+            color: var(--theme-color);
+            margin-right: 5px;
+        }
+
+        .deal-card .deal-info .deal-footer .btn-sm {
+            padding: 8px 20px;
+        }
+
+        /* ========== TOAST ========== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--theme-color);
+            color: #fff;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            z-index: 9999;
+            animation: slideUp 0.5s ease;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background: var(--bg-primary);
+            padding: 40px 0 20px;
+            border-top: 1px solid var(--border-color);
+            transition: background 0.5s ease, border-color 0.5s ease;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-col p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin: 12px 0;
+            font-size: 14px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-links a {
+            width: 38px;
+            height: 38px;
+            background: var(--bg-card);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .social-links a:hover {
+            background: var(--theme-color);
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        .footer-col h4 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .footer-col ul li {
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li:hover {
+            color: var(--theme-color);
+        }
+
+        .footer-col ul li i {
+            margin-right: 8px;
+            color: var(--theme-color);
+            width: 20px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        /* ========== NO RESULTS ========== */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
+        }
+
+        .no-results i {
+            font-size: 60px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .no-results h3 {
+            font-size: 24px;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .no-results.hidden {
+            display: none;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .deals-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background: var(--bg-card);
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                padding: 20px;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .nav-actions .btn-outline,
+            .nav-actions .btn-primary {
+                display: none;
+            }
+
+            .deals-hero h1 {
+                font-size: 32px;
+            }
+
+            .deals-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 30px;
+            }
+
+            .deal-card .deal-info .deal-header {
+                flex-direction: column;
+            }
+
+            .deal-card .deal-info .deal-price {
+                margin-top: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .deal-card .discount-badge {
+                font-size: 14px;
+                padding: 5px 12px;
+            }
+
+            .deal-card .deal-info .deal-footer {
+                flex-direction: column;
+                gap: 10px;
+                align-items: stretch;
+            }
+
+            .deals-filter .container {
+                gap: 8px;
+            }
+
+            .filter-btn {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">🍽️</span>
+                <span class="logo-text">Taste<span class="highlight">Hub</span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="deals.html" class="active">Deals</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" title="Switch Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="cart.html" class="cart-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="navCartCount">0</span>
+                </a>
+                <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+                <a href="register.html" class="btn btn-primary btn-sm">Sign Up</a>
+                <div class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== DEALS HERO ==================== -->
+    <section class="deals-hero">
+        <div class="container">
+            <span class="section-tag">Special Offers</span>
+            <h1>Hot <span class="highlight">Deals</span> & Discounts</h1>
+            <p>Don't miss out on our amazing offers! Grab your favorite meals at unbeatable prices.</p>
+        </div>
+    </section>
+
+    <!-- ==================== DEALS FILTER ==================== -->
+    <section class="deals-filter">
+        <div class="container">
+            <button class="filter-btn active" data-filter="all">🔥 All Deals</button>
+            <button class="filter-btn" data-filter="combo">🍽️ Combo Meals</button>
+            <button class="filter-btn" data-filter="discount">💰 Discount</button>
+            <button class="filter-btn" data-filter="family">👨‍👩‍👧‍👦 Family Pack</button>
+            <button class="filter-btn" data-filter="weekend">🎉 Weekend Special</button>
+        </div>
+    </section>
+
+    <!-- ==================== DEALS GRID ==================== -->
+    <section class="deals-section">
+        <div class="container">
+            <div class="deals-grid" id="dealsGrid">
+                <!-- Rendered by JavaScript -->
+            </div>
+            <div class="no-results hidden" id="noResults">
+                <i class="fas fa-tag"></i>
+                <h3>No deals found</h3>
+                <p>Check back later for new exciting offers!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo">
+                        <span class="logo-icon">🍽️</span>
+                        <span class="logo-text">Taste<span class="highlight">Hub</span></span>
+                    </div>
+                    <p>Delivering happiness through food. Taste the difference.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="deals.html">Deals</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +92 300 1234567</li>
+                        <li><i class="fab fa-whatsapp"></i> WhatsApp</li>
+                        <li><i class="fas fa-envelope"></i> info@tastehub.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Hafizabad, Pakistan</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Opening Hours</h4>
+                    <ul>
+                        <li>Mon - Fri: 11:00 AM - 11:00 PM</li>
+                        <li>Sat - Sun: 12:00 PM - 12:00 AM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 TasteHub. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ========== DEALS DATA ==========
+        const dealsData = [
+            {
+                id: 1,
+                name: "Family Feast Combo",
+                category: "combo",
+                discount: "30% OFF",
+                originalPrice: 5999,
+                discountedPrice: 4199,
+                description: "2 Large Pizzas + 1 Bucket of Fries + 4 Cold Drinks. Perfect for family dinner!",
+                image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=300&fit=crop",
+                validity: "Valid till Dec 31, 2026",
+                badge: "🔥 Best Deal"
+            },
+            {
+                id: 2,
+                name: "Burger Mania Combo",
+                category: "combo",
+                discount: "25% OFF",
+                originalPrice: 2999,
+                discountedPrice: 2249,
+                description: "2 Classic Burgers + 2 Fries + 2 Drinks. Share the love with a friend!",
+                image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop",
+                validity: "Valid till Dec 31, 2026",
+                badge: "⭐ Popular"
+            },
+            {
+                id: 3,
+                name: "BBQ Platter Special",
+                category: "discount",
+                discount: "20% OFF",
+                originalPrice: 3499,
+                discountedPrice: 2799,
+                description: "Smoky BBQ Chicken Platter with roasted veggies. A feast for meat lovers!",
+                image: "https://images.unsplash.com/photo-1587593810167-a84920ea0781?w=400&h=300&fit=crop",
+                validity: "Valid till Dec 31, 2026",
+                badge: "💰 Save Rs. 700"
+            },
+            {
+                id: 4,
+                name: "Pizza Party Combo",
+                category: "family",
+                discount: "35% OFF",
+                originalPrice: 4999,
+                discountedPrice: 3249,
+                description: "3 Large Pizzas + 1 Bucket of Fries + 1 Garlic Bread + 6 Drinks. Perfect for parties!",
+                image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop",
+                validity: "Valid till Dec 31, 2026",
+                badge: "👨‍👩‍👧‍👦 Family Special"
+            },
+            {
+                id: 5,
+                name: "Weekend Brunch Deal",
+                category: "weekend",
+                discount: "15% OFF",
+                originalPrice: 2199,
+                discountedPrice: 1869,
+                description: "2 Chicken Burgers + 2 Fries + 2 Milkshakes. Weekend treat for you!",
+                image: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400&h=300&fit=crop",
+                validity: "Valid on Sat & Sun only",
+                badge: "🎉 Weekend Special"
+            },
+            {
+                id: 6,
+                name: "Fried Chicken Feast",
+                category: "discount",
+                discount: "25% OFF",
+                originalPrice: 2499,
+                discountedPrice: 1874,
+                description: "8 pieces Crispy Fried Chicken + 2 Fries + 2 Drinks. Crispy and delicious!",
+                image: "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=400&h=300&fit=crop",
+                validity: "Valid till Dec 31, 2026",
+                badge: "🍗 Chicken Lover"
+            },
+            {
+                id: 7,
+                name: "Dessert Delight Combo",
+                category: "combo",
+                discount: "20% OFF",
+                originalPrice: 1999,
+                discountedPrice: 1599,
+                description: "2 Brownies + 2 Cheesecakes + 2 Shakes. Sweet tooth satisfaction!",
+                image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&h=300&fit=crop",
+                validity: "Valid till Dec 31, 2026",
+                badge: "🍰 Sweet Deal"
+            },
+            {
+                id: 8,
+                name: "Family BBQ Night",
+                category: "family",
+                discount: "30% OFF",
+                originalPrice: 6999,
+                discountedPrice: 4899,
+                description: "2 BBQ Platters + 2 Grilled Chicken + 4 Sides + 6 Drinks. Complete family dinner!",
+                image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=300&fit=crop",
+                validity: "Valid till Dec 31, 2026",
+                badge: "👨‍👩‍👧‍👦 Best Value"
+            }
+        ];
+
+        // ========== FORMAT PRICE ==========
+        function formatPrice(price) {
+            return 'Rs. ' + price.toLocaleString('en-PK');
+        }
+
+        // ========== CART FUNCTIONS ==========
+        function getCart() {
+            const savedCart = localStorage.getItem('tastehubCart');
+            return savedCart ? JSON.parse(savedCart) : [];
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem('tastehubCart', JSON.stringify(cart));
+            updateNavCartCount();
+        }
+
+        function updateNavCartCount() {
+            const cart = getCart();
+            const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const countEl = document.getElementById('navCartCount');
+            if (countEl) countEl.textContent = total;
+        }
+
+        // ========== ADD DEAL TO CART ==========
+        function addDealToCart(dealId) {
+            const deal = dealsData.find(d => d.id === dealId);
+            if (!deal) {
+                showToast('⚠️ Deal not found!');
+                return;
+            }
+
+            let cart = getCart();
+            
+            // Check if deal already exists in cart
+            const existingIndex = cart.findIndex(item => item.id === dealId && item.isDeal === true);
+            
+            if (existingIndex !== -1) {
+                cart[existingIndex].quantity += 1;
+            } else {
+                cart.push({
+                    id: dealId,
+                    quantity: 1,
+                    name: deal.name,
+                    price: deal.discountedPrice,
+                    originalPrice: deal.originalPrice,
+                    isDeal: true,
+                    discount: deal.discount,
+                    image: deal.image
+                });
+            }
+
+            saveCart(cart);
+            
+            // Animation
+            const countEl = document.getElementById('navCartCount');
+            countEl.style.transform = 'scale(1.5)';
+            setTimeout(() => {
+                countEl.style.transform = 'scale(1)';
+            }, 200);
+
+            showToast(`🎉 ${deal.name} added to cart! Save ${deal.discount}!`);
+            
+            // Log for debugging
+            console.log('✅ Deal added:', deal.name);
+            console.log('📦 Cart:', getCart());
+        }
+
+        // ========== RENDER DEALS ==========
+        function renderDeals(deals) {
+            const grid = document.getElementById('dealsGrid');
+            const noResults = document.getElementById('noResults');
+
+            if (!grid) return;
+
+            if (deals.length === 0) {
+                grid.innerHTML = '';
+                if (noResults) noResults.classList.remove('hidden');
+                return;
+            }
+
+            if (noResults) noResults.classList.add('hidden');
+
+            grid.innerHTML = deals.map(deal => `
+                <div class="deal-card" data-category="${deal.category}">
+                    <div class="discount-badge">${deal.discount}</div>
+                    <div class="deal-image">
+                        <img src="${deal.image}" alt="${deal.name}" loading="lazy">
+                        <div class="deal-tag">
+                            <span class="deal-type">${deal.badge}</span>
+                        </div>
+                    </div>
+                    <div class="deal-info">
+                        <div class="deal-header">
+                            <h3>${deal.name}</h3>
+                            <div class="deal-price">
+                                <span class="original">${formatPrice(deal.originalPrice)}</span>
+                                <span class="discounted">${formatPrice(deal.discountedPrice)}</span>
+                            </div>
+                        </div>
+                        <p>${deal.description}</p>
+                        <div class="deal-footer">
+                            <span class="deal-validity">
+                                <i class="far fa-calendar-alt"></i> ${deal.validity}
+                            </span>
+                            <button class="btn btn-primary btn-sm" onclick="addDealToCart(${deal.id})">
+                                <i class="fas fa-shopping-bag"></i> Grab Deal
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ========== FILTER FUNCTIONALITY ==========
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        let currentFilter = 'all';
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentFilter = this.dataset.filter;
+
+                let filtered = dealsData;
+                if (currentFilter !== 'all') {
+                    filtered = dealsData.filter(deal => deal.category === currentFilter);
+                }
+                renderDeals(filtered);
+            });
+        });
+
+        // ========== TOAST ==========
+        function showToast(message) {
+            const existing = document.querySelector('.toast');
+            if (existing) existing.remove();
+
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s';
+                setTimeout(() => toast.remove(), 500);
+            }, 3500);
+        }
+
+        // ========== THEME TOGGLE ==========
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+
+        if (localStorage.getItem('theme') === 'blue') {
+            body.classList.add('blue-theme');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('blue-theme');
+            if (body.classList.contains('blue-theme')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'blue');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // ========== HAMBURGER MENU ==========
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        // ========== SMOOTH SCROLL ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href !== '') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                        navLinks.classList.remove('open');
+                    }
+                }
+            });
+        });
+
+        // ========== NAVBAR SCROLL EFFECT ==========
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+            }
+        });
+
+        // ========== ACTIVE NAV LINK ==========
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                navLinks.classList.remove('open');
+            });
+        });
+
+        // ========== INITIALIZE ==========
+        updateNavCartCount();
+        renderDeals(dealsData);
+
+        console.log('🔥 Welcome to TasteHub Deals Page! 🇵🇰');
+        console.log('💰 Click "Grab Deal" to add to cart!');
+        console.log('📦 Current cart:', getCart());
+    </script>
+
+</body>
+</html>
